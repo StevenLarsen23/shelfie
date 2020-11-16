@@ -8,10 +8,16 @@ module.exports = {
         }).catch((err) => res.status(500).send(err))
     },
 
-    addInventory: (req, res) => {
+    createProduct: (req, res) => {
         const db = req.app.get('db');
-        const {imageURL, name, price} = req.body;
-        db.add_character({imageURL, name, price}).then(newProduct => res.status(200).send(newProduct))
+        const {name, price, img} = req.body;
+        db.create_product([name, price, img]).then(createProduct => res.status(200).send(createProduct))
         .catch((err) => res.status(500).send(err))
+    },
+
+    deleteProduct: (req, res) => {
+        const db = req.app.get('db');
+        db.delete_product()
+        //# Current step - Design: Step 1
     }
 }

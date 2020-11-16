@@ -20,6 +20,7 @@ massive({
 .catch((err) => console.log(err));
 
 app.get('/api/inventory', ctrl.getInventory)
-app.post('/api/inventory', ctrl.addInventory)
+app.post('/api/product', ctrl.createProduct)
+app.delete('/api/product/:id', ctrl.deleteProduct)
 
 app.listen(SERVER_PORT, () => console.log(`Server listening on Port:${SERVER_PORT}`))

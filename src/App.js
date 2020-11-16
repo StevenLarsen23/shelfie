@@ -25,8 +25,10 @@ class App extends Component {
         this.setState({ inventory: res.data });
       })
       .catch((err) => console.log(err));
-      console.log(this.state.inventory)
+      // console.log(this.state.inventory)
     }
+
+    
 
   
   
@@ -35,7 +37,7 @@ class App extends Component {
       <div className="App">
         <Header />
         <Dashboard inventory={this.state.inventory} />
-        <Form />
+        <Form inventory={this.getInventory}/>
       </div>
     );
   }

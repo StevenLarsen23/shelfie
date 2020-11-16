@@ -12,8 +12,12 @@ class Dashboard extends Component {
     let products = this.props.inventory.map((e, i) => {
       return (
         <div>
-          <Product key={i} />
-          <div>{`${e.image} ${e.name} ${e.price}`}</div>
+          {/* <Product key={i} /> */}
+          <div>
+            <h3>{`Product Name: ${e.name}`}</h3>
+            <img className='image' src={`${e.img}`}/>
+            <h4>{`Price: $${e.price}`}</h4>
+          </div>
         </div>
       );
     });
