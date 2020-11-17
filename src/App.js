@@ -28,6 +28,14 @@ class App extends Component {
       // console.log(this.state.inventory)
     }
 
+    deleteProduct = (id) => {
+      axios
+      .delete(`/api/product/${id}`, this.state)
+      .then((res) => {
+        this.getInventory()
+      })
+      .catch((err) => console.log(err))
+    }
     
 
   
@@ -36,8 +44,8 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <Dashboard inventory={this.state.inventory} />
         <Form inventory={this.getInventory}/>
+        <Dashboard className="Dash" inventory={this.state.inventory} deleteProduct={this.deleteProduct}/>
       </div>
     );
   }

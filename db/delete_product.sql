@@ -1,3 +1,4 @@
 DELETE FROM products
-WHERE id = $1
-RETURNING*;
+WHERE id = $1;
+
+SELECT * FROM products;
