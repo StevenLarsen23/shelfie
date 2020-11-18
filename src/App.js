@@ -10,6 +10,7 @@ class App extends Component {
     super();
     this.state = {
       inventory: [],
+      currentProduct: {}
     };
   }
 
@@ -25,13 +26,29 @@ class App extends Component {
         this.setState({ inventory: res.data });
       })
       .catch((err) => console.log(err));
-      // console.log(this.state.inventory)
+      console.log(this.state.inventory)
     }
 
     deleteProduct = (id) => {
       axios
       .delete(`/api/product/${id}`, this.state)
       .then((res) => {
+        this.getInventory()
+      })
+      .catch((err) => console.log(err))
+    }
+
+    setProduct = (productObj) => {
+      this.setState({ currentProduct: productObj})
+    }
+
+    editProduct = (e, id, productObj) => {
+      e.preventDefault()
+      console.log(id, productObj)
+      axios
+      .put(`/api/product/${id}`, productObj)
+      .then((res) => {
+        this.setState({currentProduct: {}})
         this.getInventory()
       })
       .catch((err) => console.log(err))
@@ -44,8 +61,8 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <Form inventory={this.getInventory}/>
-        <Dashboard className="Dash" inventory={this.state.inventory} deleteProduct={this.deleteProduct}/>
+        <Form inventory={this.getInventory} currentProduct={this.state.currentProduct} editProduct={this.editProduct}/>
+        <Dashboard className="Dash" inventory={this.state.inventory} deleteProduct={this.deleteProduct} setProduct={this.setProduct} />
       </div>
     );
   }

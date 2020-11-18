@@ -23,6 +23,7 @@ class Dashboard extends Component {
             <p className="product-name">{`${e.name}`}</p>
             <p className="product-price">{`$${e.price}`}</p>
             <button onClick={() => this.props.deleteProduct(e.id)}>Delete</button>
+            <button onClick={() => this.props.setProduct(e)}>Edit</button>
             </div>
           </div>
         </div>
