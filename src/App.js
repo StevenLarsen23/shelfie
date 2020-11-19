@@ -61,8 +61,10 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
+        <div className='content'>
         <Form inventory={this.getInventory} currentProduct={this.state.currentProduct} editProduct={this.editProduct}/>
         <Dashboard className="Dash" inventory={this.state.inventory} deleteProduct={this.deleteProduct} setProduct={this.setProduct} />
+        </div>
       </div>
     );
   }

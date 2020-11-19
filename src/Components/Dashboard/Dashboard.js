@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-//import Product from "../Product/Product";
 import './Dashboard.css';
-import axios from 'axios';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -19,11 +17,15 @@ class Dashboard extends Component {
         <div className="dashboard">
           <div className="products">
             <img alt={`${e.name}`} className="image" src={`${e.img}`} />
+            <div className='product'>
             <div className="product-info">
             <p className="product-name">{`${e.name}`}</p>
             <p className="product-price">{`$${e.price}`}</p>
-            <button onClick={() => this.props.deleteProduct(e.id)}>Delete</button>
-            <button onClick={() => this.props.setProduct(e)}>Edit</button>
+            </div>
+            <div className='func-buttons'>
+            <button className='func-button' onClick={() => this.props.deleteProduct(e.id)}>Delete</button>
+            <button className='func-button' onClick={() => this.props.setProduct(e)}>Edit</button>
+            </div>
             </div>
           </div>
         </div>
@@ -31,7 +33,6 @@ class Dashboard extends Component {
     });
     return (
       <div>
-        <div>Dashboard</div>
         <div>{products}</div>
       </div>
     );

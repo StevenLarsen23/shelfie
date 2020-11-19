@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
+import './Form.css'
+import ImgsViewer from 'react-images-viewer'
 
 class Form extends Component {
   constructor() {
@@ -16,17 +18,11 @@ class Form extends Component {
     this.baseState = this.state;
   }
 
-//   componentDidUpdate(prevProps, prevState) {
-//     if (prevState.product !== this.state.product) {
-//       console.log("Product has been updated");
-//     }
-//   }
-
 componentDidUpdate(prevProps) {
-    const {img, name, price} = this.props.currentProduct
-    if (prevProps.currentProduct.name !== this.state.name) {
-        this.setState({img, name, price})
-    }
+  const {img, name, price} = this.props.currentProduct
+  if (this.props.currentProduct.id !== undefined && prevProps.currentProduct.id !== this.props.currentProduct.id) {
+      this.setState({img, name, price})
+  }
 }
 
   handleImgChange = (e) => {
@@ -55,19 +51,6 @@ componentDidUpdate(prevProps) {
       .catch((err) => console.log(err));
   }
 
-//   editProduct() {
-//     axios
-//       .put(`/api/product/${this.props.id}`, this.state)
-//       .then((res) => {
-//         this.setState({
-//           img: res.data.img,
-//           name: res.data.name,
-//           price: res.data.price,
-//         });
-//       })
-//       .catch((err) => console.log(err));
-//   }
-
   handleAdd = (e) => {
       
       if(this.props.currentProduct.id) {
@@ -76,6 +59,7 @@ componentDidUpdate(prevProps) {
             name: this.state.name,
             price: this.state.price,
           })
+          this.setState(this.baseState)
       } else {
         this.createProduct()
       }
@@ -83,25 +67,29 @@ componentDidUpdate(prevProps) {
 
   render() {
     return (
-      <form>
-        <input
-          placeholder="Image URL"
+      <form className='form'>
+        <img className='preview-img' value={this.props.img}></img>
+        <p>Image URL:</p>
+        <input className='input'
           value={this.state.img}
           onChange={this.handleImgChange}
         />
-        <input
-          placeholder="Product Name"
+        <p>Product Name:</p>
+        <input className='input'
+      
           value={this.state.name}
           onChange={this.handleNameChange}
         />
-        <input
-          placeholder="Price"
+        <p>Price:</p>
+        <input className='input'
           value={this.state.price}
           onChange={this.handlePriceChange}
         />
-        <button onClick={this.handleReset}>Cancel</button>
-        <button onClick={(e) => this.handleAdd(e)}>Submit</button>
-        <button onClick={() => this.createProduct()}>Add to Inventory</button>
+        <div className='form-buttons'>
+        <button className='form-button' onClick={this.handleReset}>Cancel</button>
+        <button className='form-button' onClick={() => this.createProduct()}>Add to Inventory</button>
+        <button className='form-button' onClick={(e) => this.handleAdd(e)}>Save Changes</button>
+        </div>
       </form>
     );
   }
