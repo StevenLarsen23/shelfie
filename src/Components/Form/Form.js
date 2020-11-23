@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import './Form.css'
-// import ImgsViewer from 'react-images-viewer'
 
 class Form extends Component {
   constructor() {
